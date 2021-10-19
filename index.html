@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Flot Examples: Stacking</title>
+    <link
+      href="https://www.flotcharts.org/flot/examples/examples.css"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.canvaswrapper.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.colorhelpers.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.flot.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.flot.saturated.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.flot.browser.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.flot.drawSeries.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.flot.uiConstants.js"
+    ></script>
+    <script
+      language="javascript"
+      type="text/javascript"
+      src="https://www.flotcharts.org/flot/source/jquery.flot.stack.js"
+    ></script>
+    <script type="text/javascript">
+      $(function () {
+        var d1 = [];
+        for (var i = 0; i <= 10; i += 1) {
+          d1.push([i, parseInt(Math.random() * 30)]);
+        }
+
+        var d2 = [];
+        for (var i = 0; i <= 10; i += 1) {
+          d2.push([i, parseInt(Math.random() * 30)]);
+        }
+
+        var d3 = [];
+        for (var i = 0; i <= 10; i += 1) {
+          d3.push([i, parseInt(Math.random() * 30)]);
+        }
+
+        var stack = 1,
+          bars = false,
+          lines = false,
+          steps = false;
+
+        function plotWithOptions() {
+          $.plot(
+            "#placeholder",
+            [
+              d1,
+              d2,
+              d3
+              // {
+              //   label: "line",
+              //   data: d3,
+              //   // yaxis: 1,
+              //   stack: false,
+              //   lines: line_options,
+              //   points: {
+              //     radius: 5,
+              //     show: true
+              //   }
+              // }
+            ],
+            {
+              series: {
+                stack: stack,
+                lines: {
+                  show: lines,
+                  fill: true,
+                  steps: steps
+                },
+                bars: {
+                  show: bars,
+                  barWidth: 0.6
+                }
+              },
+              yaxis: {
+                autoScale: "exact"
+              }
+            }
+          );
+        }
+
+        plotWithOptions();
+
+        $(".stackControls button").click(function (e) {
+          e.preventDefault();
+          stack = $(this).text() == "With stacking" ? true : null;
+          plotWithOptions();
+        });
+
+        $(".graphControls button").click(function (e) {
+          e.preventDefault();
+          bars = $(this).text().indexOf("Bars") != -1;
+          lines = $(this).text().indexOf("Lines") != -1;
+          steps = $(this).text().indexOf("steps") != -1;
+          plotWithOptions();
+        });
+
+        // Add the Flot version string to the footer
+
+        $("#footer").prepend("Flot " + $.plot.version + " &ndash; ");
+      });
+    </script>
+  </head>
+
+  <body>
+    <div id="header">
+      <h2>Stacking</h2>
+    </div>
+    <div id="content">
+      <div class="demo-container">
+        <div
+          id="placeholder"
+          class="demo-placeholder"
+          style="padding: 0px; position: relative;"
+        >
+          <canvas
+            class="flot-base"
+            width="818"
+            height="413"
+            style="
+              direction: ltr;
+              position: absolute;
+              left: 0px;
+              top: 0px;
+              width: 818px;
+              height: 413px;
+            "
+          ></canvas
+          ><canvas
+            class="flot-overlay"
+            width="818"
+            height="413"
+            style="
+              direction: ltr;
+              position: absolute;
+              left: 0px;
+              top: 0px;
+              width: 818px;
+              height: 413px;
+            "
+          ></canvas>
+          <div
+            class="flot-svg"
+            style="
+              position: absolute;
+              top: 0px;
+              left: 0px;
+              height: 100%;
+              width: 100%;
+              pointer-events: none;
+            "
+          >
+            <svg style="width: 100%; height: 100%;">
+              <g
+                class="flot-x-axis flot-x1-axis xAxis x1Axis"
+                style="position: absolute; inset: 0px;"
+              >
+                <text
+                  x="28.1015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  0
+                </text>
+                <text
+                  x="105.9015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  1
+                </text>
+                <text
+                  x="183.7015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  2
+                </text>
+                <text
+                  x="261.5015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  3
+                </text>
+                <text
+                  x="339.3015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  4
+                </text>
+                <text
+                  x="417.1015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  5
+                </text>
+                <text
+                  x="494.90156249999995"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  6
+                </text>
+                <text
+                  x="572.7015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  7
+                </text>
+                <text
+                  x="650.5015625"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  8
+                </text>
+                <text
+                  x="728.3015624999999"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  9
+                </text>
+                <text
+                  x="802.2109375"
+                  y="408"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: center;"
+                >
+                  10
+                </text>
+              </g>
+              <g
+                class="flot-y-axis flot-y1-axis yAxis y1Axis"
+                style="position: absolute; inset: 0px;"
+              >
+                <text
+                  x="8.78125"
+                  y="385"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  0
+                </text>
+                <text
+                  x="1"
+                  y="340.0602409638554"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  10
+                </text>
+                <text
+                  x="1"
+                  y="295.12048192771084"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  20
+                </text>
+                <text
+                  x="1"
+                  y="250.18072289156626"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  30
+                </text>
+                <text
+                  x="1"
+                  y="205.24096385542168"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  40
+                </text>
+                <text
+                  x="1"
+                  y="160.3012048192771"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  50
+                </text>
+                <text
+                  x="1"
+                  y="115.36144578313252"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  60
+                </text>
+                <text
+                  x="1"
+                  y="70.42168674698794"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  70
+                </text>
+                <text
+                  x="1"
+                  y="25.481927710843372"
+                  class="flot-tick-label tickLabel"
+                  style="position: absolute; text-align: right;"
+                >
+                  80
+                </text>
+              </g>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <p>
+        With the stack plugin, you can have Flot stack the series. This is
+        useful if you wish to display both a total and the constituents it is
+        made of. The only requirement is that you provide the input sorted on x.
+      </p>
+
+      <p class="stackControls">
+        <button>With stacking</button>
+        <button>Without stacking</button>
+      </p>
+
+      <p class="graphControls">
+        <button>Bars</button>
+        <button>Lines</button>
+        <button>Lines with steps</button>
+      </p>
+    </div>
+    <script src="src/index.js"></script>
+  </body>
+</html>
